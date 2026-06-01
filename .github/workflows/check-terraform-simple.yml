@@ -10,6 +10,7 @@ jobs:
       - name: Check Terraform
         id: check_terraform
         run: terraform version
+        continue-on-error: true
       - name: Setup Terraform
         if: failure() && steps.check_terraform.outcome == 'failure'
         uses: hashicorp/setup-terraform@v3
