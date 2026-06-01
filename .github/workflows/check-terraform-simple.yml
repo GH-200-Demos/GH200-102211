@@ -5,18 +5,13 @@ on:
 
 jobs:
   check:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check Terraform
+        id: check_terraform
         run: terraform version
-        continue-on-error: true
       - name: Setup Terraform
+        if: failure() && steps.check_terraform.outcome == 'failure'
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.8.5
