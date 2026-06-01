@@ -1,0 +1,14 @@
+name: Check Terraform
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Terraform
+        run: |
+          which terraform || true
+          terraform version || true
